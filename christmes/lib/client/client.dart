@@ -1,8 +1,9 @@
 import 'dart:html';
-import 'package:communi_in_geil_v2/screens/chatPage.dart';
+import 'package:christmes/screens/chatPage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:matrix/matrix.dart';
+import 'package:matrix_api_lite/src/generated/fixed_model.dart';
 import '../screens/groupPage.dart';
 import '../models/chatUsersModel.dart';
 
@@ -26,6 +27,12 @@ class Clientclass {
 
   List chatrooms = [];
 
+Future<Uri?> getAvatar () async {
+  final pic = client.getContentThumbnail("matrix.org", "tHwINSDGpHigLhiNfKAQxMeR", 800, 600);
+  //return client.getContentThumbnail("matrix.org", "tHwINSDGpHigLhiNfKAQxMeR", 800, 600);
+  return client.getAvatarUrl(client.userID!);
+  
+}
 
   Future<void> sentmessage (String message, String roomID, String us, String pass) async {
     print("2"+us + " " + pass);

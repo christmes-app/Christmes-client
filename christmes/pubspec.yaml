@@ -1,4 +1,4 @@
-name: communi_in_geil_v2
+name: christmes
 description: Zentraler Anlaufpunkt in Verein oder Gemeinde
 
 # The following line prevents the package from being accidentally published to
@@ -31,14 +31,16 @@ dependencies:
     sdk: flutter
   matrix: ^0.8.12
   flutter_olm: ^1.2.0
-  flutter_secure_storage: ^5.0.2
+  flutter_secure_storage:
+  cryptography_flutter: ^2.0.2
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
   provider: ^6.0.2
   flutter_openssl_crypto: ^0.1.0
-  hive: ^2.0.6
+  hive: ^2.2.3
+  hive_flutter: ^1.1.0
   path_provider: ^2.0.9
   babstrap_settings_screen: ^0.1.1
 

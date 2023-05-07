@@ -1,6 +1,6 @@
 
 
-import 'package:communi_in_geil_v2/models/chatMessageModel.dart';
+import 'package:christmes/models/chatMessageModel.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import '../client/client.dart';

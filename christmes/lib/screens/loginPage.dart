@@ -64,7 +64,7 @@ class _LoginPageState extends State<LoginPage> {
                     hintText: 'Enter secure password'),
               ),
             ),
-            FlatButton(
+            TextButton(
               onPressed: (){
                 //TODO FORGOT PASSWORD SCREEN GOES HERE
                 showDialog(
@@ -87,7 +87,7 @@ class _LoginPageState extends State<LoginPage> {
               width: 250,
               decoration: BoxDecoration(
                   color: Colors.blue, borderRadius: BorderRadius.circular(20)),
-              child: FlatButton(
+              child: TextButton(
                 onPressed: () async {
 
                   final storage = new FlutterSecureStorage();
@@ -101,7 +101,7 @@ class _LoginPageState extends State<LoginPage> {
                   await client.getRooms();
                   print(await storage1.read(key: "user"));
                   print(await storage1.read(key: "password"));
-
+                  print(await Future.value(client.getAvatar()));
                   Navigator.push(
                       context, MaterialPageRoute(builder: (_) => HomePage()));
                 },

@@ -1,6 +1,6 @@
 import 'dart:developer';
 
-import 'package:communi_in_geil_v2/screens/chatDetailPage.dart';
+import 'package:christmes/screens/chatDetailPage.dart';
 import 'package:flutter/material.dart';
 import 'package:matrix/matrix.dart';
 import 'package:hive/hive.dart';

@@ -1,6 +1,6 @@
-import 'package:communi_in_geil_v2/client/client.dart';
-import 'package:communi_in_geil_v2/models/chatUsersModel.dart';
-import 'package:communi_in_geil_v2/widgets/conversationList.dart';
+import 'package:christmes/client/client.dart';
+import 'package:christmes/models/chatUsersModel.dart';
+import 'package:christmes/widgets/conversationList.dart';
 import 'package:flutter/material.dart';
 GroupPageState gp = new GroupPageState();
 class GroupPage extends StatefulWidget {
