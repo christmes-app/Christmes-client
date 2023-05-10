@@ -1,6 +1,7 @@
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:flutter/material.dart';
-import '../client/client.dart';
+import 'package:hive/hive.dart';
+import '../utils/client.dart';
 import 'homePage.dart';
 
 
@@ -90,18 +91,13 @@ class _LoginPageState extends State<LoginPage> {
               child: TextButton(
                 onPressed: () async {
 
-                  final storage = new FlutterSecureStorage();
-                  final storage1 = new FlutterSecureStorage();
-                  //print(userController.text);
-                  await storage.write(key: "user", value: userController.text);
-                  //print(passwordController.text);
-                  await storage.write(key: "password", value: passwordController.text);
-                  Clientclass client = new Clientclass();
-                  await client.addparams();
+                  Hive.box('client').put("username", userController.text);
+                  Hive.box('client').put("pwd", passwordController.text);
+                  MatrixClient client = MatrixClient();
                   await client.getRooms();
-                  print(await storage1.read(key: "user"));
-                  print(await storage1.read(key: "password"));
-                  print(await Future.value(client.getAvatar()));
+                  //await client.getMessages("!OvzGnzTrZefYXEFufr:matrix.org");
+
+                  //print(await Future.value(client.getAvatar()));
                   Navigator.push(
                       context, MaterialPageRoute(builder: (_) => HomePage()));
                 },

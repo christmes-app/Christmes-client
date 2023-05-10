@@ -2,18 +2,22 @@
 
 import 'package:christmes/models/chatMessageModel.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-import '../client/client.dart';
+import 'package:hive/hive.dart';
+import '../utils/client.dart';
 
 class ChatDetailPage extends StatefulWidget{
 
 String roomID;
-ChatDetailPage( {required this.roomID});
+String roomName;
+List<ChatMessage> Listmessages;
+ChatDetailPage( {required this.roomID,required this.Listmessages, required this.roomName});
 
   @override
   ChatDetailPageState createState() => ChatDetailPageState();
 }
 
+
+MatrixClient client = MatrixClient();
 
 
 class ChatDetailPageState extends State<ChatDetailPage> {
@@ -25,26 +29,16 @@ class ChatDetailPageState extends State<ChatDetailPage> {
     myController.dispose();
     super.dispose();
   }
-  String name = "test";
 
 
-  List<ChatMessage> messages = [
-    ChatMessage(messageContent: "Hello, Will", messageType: "receiver"),
-    ChatMessage(messageContent: "How have you been?", messageType: "receiver"),
-    ChatMessage(messageContent: "Hey Kriss, I am doing fine dude. wbu?", messageType: "sender"),
-    ChatMessage(messageContent: "ehhhh, doing OK.", messageType: "receiver"),
-    ChatMessage(messageContent: "Is there any thing wrong?", messageType: "sender"),
-  ];
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  String _message(String value){
-    return "";
-  }
+
 
   @override
   Widget build(BuildContext context) {
+    List<ChatMessage> messages = widget.Listmessages;
 
-
-
+    String name = widget.roomName;
     return Scaffold(
         appBar: AppBar(
           elevation: 0,
@@ -63,7 +57,7 @@ class ChatDetailPageState extends State<ChatDetailPage> {
                   ),
                   SizedBox(width: 2,),
                   CircleAvatar(
-                    //backgroundImage: NetworkImage("https://randomuser.me/api/portraits/men/5.jpg"),
+                    backgroundImage: NetworkImage("https://matrix-client.matrix.org/_matrix/media/v3/thumbnail/matrix.org/tHwINSDGpHigLhiNfKAQxMeR?width=800&height=600&method=scale"),
                     maxRadius: 20,
                   ),
                   SizedBox(width: 12,),
@@ -153,9 +147,11 @@ class ChatDetailPageState extends State<ChatDetailPage> {
                     onPressed: () async {
                       print("pressed");
 
-                      Clientclass client = new Clientclass();
-                      final storage1 = new FlutterSecureStorage();
-                      client.sentmessage(myController.text, widget.roomID, (await storage1.read(key: "user"))!, (await storage1.read(key: "password"))!);
+                      MatrixClient client = new MatrixClient();
+                     client.sentmessage(myController.text, widget.roomID, (await Hive.box('client').get("username"))!, (await Hive.box('client').get("pwd"))!);
+                      myController.text = "";
+                      Navigator.pop(context);  // pop current page
+                      Navigator.pushNamed(context, "Setting"); // push it back in
                     },
                     child: Icon(Icons.send,color: Colors.white,size: 18,),
                     backgroundColor: Colors.blue,
