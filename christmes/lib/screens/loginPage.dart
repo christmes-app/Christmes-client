@@ -1,8 +1,11 @@
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
+import '../misc/colors.dart';
 import '../utils/client.dart';
+import 'hamburger_menu.dart';
 import 'homePage.dart';
+import 'loginandregisterPage.dart';
 
 
 
@@ -35,10 +38,11 @@ class _LoginPageState extends State<LoginPage> {
               padding: const EdgeInsets.only(top: 60.0),
               child: Center(
                 child: Container(
-                    width: 200,
-                    height: 150,
+                  width: 200,
+                  height: 150,
 
-                    child: Icon(Icons.login,color: Colors.grey.shade600, size: 100,)),
+                  child: const Image(image: AssetImage('../img/christmes_logo.png')),
+                ),
               ),
             ),
             Padding(
@@ -48,8 +52,8 @@ class _LoginPageState extends State<LoginPage> {
                 controller: userController,
                 decoration: InputDecoration(
                     border: OutlineInputBorder(),
-                    labelText: 'Email',
-                    hintText: 'Enter valid email id as abc@gmail.com'),
+                    labelText: 'Username',
+                    hintText: 'Enter valid username'),
               ),
             ),
             Padding(
@@ -72,7 +76,7 @@ class _LoginPageState extends State<LoginPage> {
                   context: context,
                   builder: (BuildContext context){
                     return AlertDialog(
-                      title: Text('Alert!'),
+                      title: Text('Forgot Password function'),
                     );
                   },
                 );
@@ -87,7 +91,7 @@ class _LoginPageState extends State<LoginPage> {
               height: 50,
               width: 250,
               decoration: BoxDecoration(
-                  color: Colors.blue, borderRadius: BorderRadius.circular(20)),
+                  color: AppColors.blueColor, borderRadius: BorderRadius.circular(20)),
               child: TextButton(
                 onPressed: () async {
 
@@ -99,7 +103,7 @@ class _LoginPageState extends State<LoginPage> {
 
                   //print(await Future.value(client.getAvatar()));
                   Navigator.push(
-                      context, MaterialPageRoute(builder: (_) => HomePage()));
+                      context, MaterialPageRoute(builder: (_) => HamburgerMenu()));
                 },
                 child: Text(
                   'Login',
@@ -110,7 +114,19 @@ class _LoginPageState extends State<LoginPage> {
             SizedBox(
               height: 130,
             ),
-            Text('New User? Create Account')
+      Container(
+        height: 20,
+        width: 200,
+        child: InkWell(
+          onTap: () {
+
+            print('Clicked on new User');
+            Navigator.push(
+                context, MaterialPageRoute(builder: (_) => RegisterPage()));
+          },
+          child: Text('New User? Create Account'),
+        ),
+      ),
           ],
         ),
       ),
