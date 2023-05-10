@@ -1,25 +1,20 @@
-import 'package:christmes/client/client.dart';
+import '../utils/client.dart';
 import 'package:christmes/models/chatUsersModel.dart';
 import 'package:christmes/widgets/conversationList.dart';
 import 'package:flutter/material.dart';
-GroupPageState gp = new GroupPageState();
 class GroupPage extends StatefulWidget {
-
-
   @override
   GroupPageState createState() => GroupPageState();
-
 }
 
-Clientclass client = new Clientclass();
+MatrixClient client = new MatrixClient();
 class GroupPageState extends State<GroupPage> {
 
 
 
 
   List<ChatUsers> chatUsers = client.groupUsers;
-
-
+  //List<ChatUsers> chatUsers = [];
 
   @override
   Widget build(BuildContext context) {
@@ -96,6 +91,7 @@ class GroupPageState extends State<GroupPage> {
                   imageUrl: chatUsers[index].imageURL,
                   time: chatUsers[index].time,
                   roomID: chatUsers[index].roomID,
+                  messages: [],
                   isMessageRead: (index == 0 || index == 3)?true:false,
                 );
               },

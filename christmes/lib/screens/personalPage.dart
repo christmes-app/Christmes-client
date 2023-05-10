@@ -1,28 +1,22 @@
 import 'dart:io';
 import 'dart:js_util';
-
-import 'package:christmes/client/client.dart';
+import '../utils/client.dart';
 import 'package:christmes/misc/colors.dart';
+import 'package:christmes/screens/loginPage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:babstrap_settings_screen/babstrap_settings_screen.dart';
+import 'package:hive/hive.dart';
 class PersonalPage extends StatefulWidget {
 
   @override
   _PersonalPageState createState() => _PersonalPageState();
 }
 
-Clientclass client = new Clientclass();
+MatrixClient client = new MatrixClient();
 class _PersonalPageState extends State<PersonalPage> {
 
-    /*List<ChatUsers> chatUsers = [
-        ChatUsers(name: "-------Personal Page---------",
-            messageText: "Awesome Setup",
-            imageURL: "https://randomuser.me/api/portraits/men/5.jpg",
-            time: "Now", roomID: ""),
-
-    ];*/
 
     final double coverHeight = 500;
     final double profileHeight = 114;
@@ -118,7 +112,15 @@ class _PersonalPageState extends State<PersonalPage> {
                   settingsGroupTitle: "Account",
                   items: [
                     SettingsItem(
-                      onTap: () {},
+                      onTap: () {
+                        String username= Hive.box('client').get("username");
+                        String pwd= Hive.box('client').get("pwd");
+                        print("before"+username+pwd);
+                        Hive.box('client').delete("username");
+                        Hive.box('client').delete("pwd");
+                        Navigator.push(
+                            context, MaterialPageRoute(builder: (_) => LoginPage()));
+                      },
                       icons: Icons.exit_to_app_rounded,
                       title: "Sign Out",
                     ),
