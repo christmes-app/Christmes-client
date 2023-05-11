@@ -84,28 +84,6 @@ Future<Uri?> getAvatar () async {
         print(client.getRoomById(list[i])?.isDirectChat);
         directchat = client.getRoomById(list[i])?.isDirectChat;
         if(directchat!=null) {
-          if (!directchat) {
-            print("addtolist");
-
-            gp.chatUsers.add(ChatUsers(name: client.getRoomById(list[i])!.displayname,
-                messageText: "Awesome Setup",
-                imageURL: "https://matrix-client.matrix.org/_matrix/media/v3/thumbnail/matrix.org/tHwINSDGpHigLhiNfKAQxMeR?width=800&height=600&method=scale",
-                time: "Now", roomID: client.getRoomById(list[i])!.id));
-            for(int i=0; i<gp.chatUsers.length; i++) {
-              print( gp.chatUsers[i].name);
-            }
-          } else {
-
-          }
-        }
-      }
-      for(int i=0; i<list.length; i++){
-        bool? directchat = false;
-        print(list[i]);
-        print(client.getRoomById(list[i])?.displayname);
-        print(client.getRoomById(list[i])?.isDirectChat);
-        directchat = client.getRoomById(list[i])?.isDirectChat;
-        if(directchat!=null) {
           if (directchat) {
             print("addtolist");
 
@@ -121,6 +99,29 @@ Future<Uri?> getAvatar () async {
           }
         }
       }
+      for(int i=0; i<list.length; i++){
+        bool? directchat = false;
+        print(list[i]);
+        print(client.getRoomById(list[i])?.displayname);
+        print(client.getRoomById(list[i])?.isDirectChat);
+        directchat = client.getRoomById(list[i])?.isDirectChat;
+        if(directchat!=null) {
+          if (!directchat) {
+            print("addtolist");
+
+            gp.chatUsers.add(ChatUsers(name: client.getRoomById(list[i])!.displayname,
+                messageText: "Awesome Setup",
+                imageURL: "https://matrix-client.matrix.org/_matrix/media/v3/thumbnail/matrix.org/tHwINSDGpHigLhiNfKAQxMeR?width=800&height=600&method=scale",
+                time: "Now", roomID: client.getRoomById(list[i])!.id));
+            for(int i=0; i<gp.chatUsers.length; i++) {
+              print( gp.chatUsers[i].name);
+            }
+          } else {
+
+          }
+        }
+      }
+
 
       return list;
     }
