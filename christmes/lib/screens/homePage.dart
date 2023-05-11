@@ -1,6 +1,6 @@
-import 'package:communi_in_geil_v2/models/chatUsersModel.dart';
-import 'package:communi_in_geil_v2/screens/groupPage.dart';
-import 'package:communi_in_geil_v2/screens/personalPage.dart';
+import 'package:christmes/models/chatUsersModel.dart';
+import 'package:christmes/screens/groupPage.dart';
+import 'package:christmes/screens/personalPage.dart';
 import 'package:flutter/material.dart';
 
 import 'chatPage.dart';

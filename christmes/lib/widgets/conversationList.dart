@@ -1,9 +1,12 @@
 import 'dart:developer';
 
-import 'package:communi_in_geil_v2/screens/chatDetailPage.dart';
+import 'package:christmes/screens/chatDetailPage.dart';
+import 'package:christmes/utils/client.dart';
 import 'package:flutter/material.dart';
 import 'package:matrix/matrix.dart';
 import 'package:hive/hive.dart';
+
+import '../models/chatMessageModel.dart';
 class ConversationList extends StatefulWidget{
   String name;
   String messageText;
@@ -11,7 +14,8 @@ class ConversationList extends StatefulWidget{
   String time;
   String roomID;
   bool isMessageRead;
-  ConversationList({required this.name,required this.messageText,required this.imageUrl,required this.time,required this.isMessageRead, required this.roomID});
+  List<ChatMessage> messages;
+  ConversationList({required this.name,required this.messageText,required this.imageUrl,required this.time,required this.isMessageRead, required this.roomID,required this.messages});
 
   @override
   _ConversationListState createState() => _ConversationListState();
@@ -21,11 +25,16 @@ class _ConversationListState extends State<ConversationList> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: (){
+      onTap: () async{
+        MatrixClient client = new MatrixClient();
+        List<ChatMessage> message = await client.getMessages(widget.roomID);
+        //await client.getMessages(widget.roomID);
         Navigator.push(context, MaterialPageRoute(builder: (context){
 
           return ChatDetailPage(
+            roomName: widget.name,
            roomID: widget.roomID,
+            Listmessages:  message,
           );
         }));
       },
@@ -38,7 +47,7 @@ class _ConversationListState extends State<ConversationList> {
                 children: <Widget>[
                   CircleAvatar(
                     //setAvatarPicture
-                    //backgroundImage: NetworkImage(widget.imageUrl),
+                    backgroundImage: NetworkImage(widget.imageUrl),
                     maxRadius: 30,
                   ),
                   SizedBox(width: 16,),

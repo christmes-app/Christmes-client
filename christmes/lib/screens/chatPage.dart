@@ -1,27 +1,21 @@
-import 'package:communi_in_geil_v2/models/chatUsersModel.dart';
-import 'package:communi_in_geil_v2/widgets/conversationList.dart';
+import 'package:christmes/models/chatUsersModel.dart';
+import 'package:christmes/widgets/conversationList.dart';
 import 'package:flutter/material.dart';
-import 'package:matrix/matrix.dart';
-import 'package:hive/hive.dart';
-class ChatPage extends StatefulWidget {
+import '../utils/client.dart';
 
+class ChatPage extends StatefulWidget {
   @override
-  _ChatPageState createState() => _ChatPageState();
+  ChatPageState createState() => ChatPageState();
 }
 
+MatrixClient client = new MatrixClient();
+class ChatPageState extends State<ChatPage> {
 
-class _ChatPageState extends State<ChatPage> {
 
-  List<ChatUsers> chatUsers = [
-    ChatUsers(name: "Jane Russel", messageText: "Awesome Setup", imageURL: "https://randomuser.me/api/portraits/men/5.jpg", time: "Now", roomID: ""),
-    ChatUsers(name: "Glady's Murphy", messageText: "That's Great", imageURL: "https://randomuser.me/api/portraits/men/5.jpg", time: "Yesterday", roomID: ""),
-    ChatUsers(name: "Jorge Henry", messageText: "Hey where are you?", imageURL: "https://randomuser.me/api/portraits/men/5.jpg", time: "31 Mar", roomID: ""),
-    ChatUsers(name: "Philip Fox", messageText: "Busy! Call me in 20 mins", imageURL: "https://randomuser.me/api/portraits/men/5.jpg", time: "28 Mar", roomID: ""),
-    ChatUsers(name: "Debra Hawkins", messageText: "Thankyou, It's awesome", imageURL: "https://randomuser.me/api/portraits/men/5.jpg", time: "23 Mar", roomID: ""),
-    ChatUsers(name: "Jacob Pena", messageText: "will update you in evening", imageURL: "https://randomuser.me/api/portraits/men/5.jpg", time: "17 Mar", roomID: ""),
-    ChatUsers(name: "Andrey Jones", messageText: "Can you please share the file?", imageURL: "https://randomuser.me/api/portraits/men/5.jpg", time: "24 Feb", roomID: ""),
-    ChatUsers(name: "John Wick", messageText: "How are you?", imageURL: "https://randomuser.me/api/portraits/men/5.jpg", time: "18 Feb", roomID: ""),
-  ];
+
+
+  //List<ChatUsers> chatUsers = [];
+  List<ChatUsers> chatUsers = client.chatUsers;
 
   @override
   Widget build(BuildContext context) {
@@ -97,7 +91,8 @@ class _ChatPageState extends State<ChatPage> {
                   messageText: chatUsers[index].messageText,
                   imageUrl: chatUsers[index].imageURL,
                   time: chatUsers[index].time,
-                  roomID: "",
+                  roomID: chatUsers[index].roomID,
+                  messages: [],
                   isMessageRead: (index == 0 || index == 3)?true:false,
                 );
               },
